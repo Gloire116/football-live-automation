@@ -4,7 +4,10 @@ import requests
 API_KEY = os.environ.get("API_FOOTBALL_KEY")
 
 if not API_KEY:
-    raise Exception("La clé API_FOOTBALL_KEY est introuvable.")
+    raise Exception("API_FOOTBALL_KEY est absent.")
+
+print("Clé détectée :", "OUI")
+print("Longueur de la clé :", len(API_KEY))
 
 url = "https://v3.football.api-sports.io/fixtures?live=all"
 
@@ -22,6 +25,8 @@ print("Nombre de matchs :", data.get("results", 0))
 
 if data.get("errors"):
     print("Erreurs API :", data["errors"])
+else:
+    print("Authentification API réussie.")
 
 for match in data.get("response", []):
     home = match["teams"]["home"]["name"]
